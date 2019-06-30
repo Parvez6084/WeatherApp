@@ -69,38 +69,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
         if (getIntent().hasExtra(Constants.LIST)) {
+
             String object = getIntent().getStringExtra(Constants.LIST);
             information = new Gson().fromJson(object, CityInfoListClass.Information.class);
-
-
-            LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                    double longitude = location.getLongitude();
-                    double latitude = location.getLatitude();
-
-                    AlarmManager manager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(System.currentTimeMillis());
-                    Intent intent = new Intent(MapsActivity.this, NotificationService.class);
-
-                    intent.putExtra("latitude", latitude);
-                    intent.putExtra("longitude", longitude);
-
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
-                            intent, PendingIntent.FLAG_ONE_SHOT);
-
-                    if (manager != null) {
-                        manager.setExact(AlarmManager.RTC, calendar.getTimeInMillis() + 2000, pendingIntent);
-                    }
-
-                    return;
-                }
-            }
-
-
-
         }
 
         cityNameTextView.setText(information.getName());
