@@ -82,8 +82,6 @@ public class NotificationService extends BroadcastReceiver {
 
                         CurrentDataClass currentDataClass = response.body();
 
-                        Toast.makeText(context, "Api Called", Toast.LENGTH_SHORT).show();
-
                         if (currentDataClass != null) {
 
                             String content = "Current weather at " + getCelsiusFromKelvin(currentDataClass.getMain().getTemp())
