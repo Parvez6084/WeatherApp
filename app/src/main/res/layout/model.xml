@@ -22,29 +22,32 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
 
             <TextView
-                android:id="@+id/city_name"
+                android:id="@+id/city_name_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="City"
-                android:textSize="18dp"
+                android:textSize="18sp"
+                android:textColor="@color/colorBlack"
                 android:fontFamily="@font/roboto_regular"/>
 
             <TextView
-                android:id="@+id/weather_position"
+                android:id="@+id/weather_position_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="cloud"
+                android:textColor="@color/colorBlack"
                 android:textSize="14sp"
                 android:fontFamily="@font/roboto_regular"/>
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tamparater"
+            android:id="@+id/temperature_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -53,8 +56,9 @@
             android:layout_toEndOf="@+id/name"
             android:gravity="right"
             android:text="25"
-            android:textSize="24sp"
-            android:fontFamily="@font/roboto_medium"/>
+            android:textSize="32sp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/roboto_regular"/>
 
     </RelativeLayout>
 

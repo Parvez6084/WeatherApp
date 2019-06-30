@@ -1,38 +1,72 @@
 package com.parvez.weatherapp.service;
 
 import android.app.Notification;
-import android.app.Service;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Build;
-import android.os.IBinder;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.parvez.weatherapp.R;
+import com.parvez.weatherapp.view.SplashScreenActivity;
 
-public class NotificationService extends Service {
+public class NotificationService extends BroadcastReceiver {
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    private String title;
+    private String body;
+
+    private String smallIcon;
+    private String largeIcon;
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public IBinder onBind(Intent intent) {
+    public void onReceive(Context context, Intent intent) {
 
-        if (intent.getExtras() != null) {
+        Log.d("Alarm", "Receiver Triggered");
 
-            String title = intent.getStringExtra("title");
+        NotificationManager mNotificationManager;
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(context.getApplicationContext(), "notify_001");
+        Intent ii = new Intent(context.getApplicationContext(), SplashScreenActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, ii, 0);
 
+        mBuilder.setContentIntent(pendingIntent);
+        mBuilder.setSmallIcon(R.mipmap.ic_launcher_round);
+        mBuilder.setContentTitle("Your Title");
+        mBuilder.setContentText("Your text");
+        mBuilder.setPriority(Notification.PRIORITY_MAX);
 
-            Notification.Builder notification = new Notification.Builder(this, "demo")
-                    .setContentTitle(title)
-                    .setSmallIcon(R.drawable.ic_launcher_background);
+        mNotificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            String channelId = "Your_channel_id";
+            NotificationChannel channel = new NotificationChannel(
+                    channelId,
+                    "Channel human readable title",
+                    Notification.PRIORITY_DEFAULT);
+            mNotificationManager.createNotificationChannel(channel);
+            mBuilder.setChannelId(channelId);
         }
 
-
-        return null;
+        mNotificationManager.notify(0, mBuilder.build());
     }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    private void networkCall() {
 
-        return START_STICKY;
+        title = "Title";
+        body = "Content";
+
+        //lat lng
     }
 }

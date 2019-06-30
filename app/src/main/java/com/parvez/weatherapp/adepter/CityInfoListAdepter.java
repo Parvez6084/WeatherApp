@@ -2,7 +2,6 @@ package com.parvez.weatherapp.adepter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +21,8 @@ import java.util.List;
 
 public class CityInfoListAdepter extends RecyclerView.Adapter<CityInfoListAdepter.MyViewHolder> {
 
-    Context context;
-    List<CityInfoListClass> cityLists;
-    double lat ,lon;
+    private Context context;
+    private List<CityInfoListClass> cityLists;
 
     public CityInfoListAdepter(Context context, List<CityInfoListClass> cityLists) {
         this.context = context;
@@ -43,11 +41,11 @@ public class CityInfoListAdepter extends RecyclerView.Adapter<CityInfoListAdepte
 
         holder.cityName.setText(cityLists.get(0).getList().get(position).getName());
         holder.weather.setText(cityLists.get(0).getList().get(position).getWeather().get(0).getMain());
-        holder.tamparater.setText(String.format("%.0f",HelperClass.celsiusFormet(cityLists.get(0).getList().get(position).getMain().getTemp()))+"°c");
+        holder.temperature.setText(String.format("%.0f",HelperClass.celsiusFormet(cityLists.get(0).getList().get(position).getMain().getTemp()))+"°c");
         holder.itemView.setOnClickListener(view -> {
 
             Intent i = new Intent(context, MapsActivity.class);
-            i.putExtra("list", new Gson().toJson(cityLists.get(0).getList().get(position)));
+            i.putExtra(Constants.LIST , new Gson().toJson(cityLists.get(0).getList().get(position)));
             context.startActivity(i);
 
         });
@@ -61,14 +59,15 @@ public class CityInfoListAdepter extends RecyclerView.Adapter<CityInfoListAdepte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView cityName, weather, tamparater;
+        private TextView cityName, weather, temperature;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            cityName = itemView.findViewById(R.id.city_name);
-            weather = itemView.findViewById(R.id.weather_position);
-            tamparater = itemView.findViewById(R.id.tamparater);
+            cityName = itemView.findViewById(R.id.city_name_textView);
+            weather = itemView.findViewById(R.id.weather_position_textView);
+            temperature = itemView.findViewById(R.id.temperature_textView);
 
         }
     }

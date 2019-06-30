@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <dist:module dist:instant="true" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SET_ALARM"/>
 
     <application
         android:allowBackup="true"
@@ -23,7 +24,7 @@
 
         <activity
             android:name=".view.MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:parentActivityName=".view.DashboardActivity" />
         <activity android:name=".view.DashboardActivity" />
         <activity android:name=".view.SplashScreenActivity">
             <intent-filter>
@@ -33,9 +34,8 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".service.NotificationService"
-            android:exported="true" />
+        <receiver android:name=".service.NotificationService"
+            android:exported="true"/>
     </application>
 
 </manifest>

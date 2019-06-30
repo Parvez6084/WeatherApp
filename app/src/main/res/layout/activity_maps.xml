@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,98 +13,123 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"/>
+        android:layout_weight="5" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/map"
-        android:layout_weight="1"
-        android:paddingBottom="10dp"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        >
+        android:layout_weight="1">
 
-        <LinearLayout
-            android:id="@+id/info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            >
-
-            <TextView
-                android:id="@+id/cityName_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="Dhaka"
-                android:textColor="@color/colorBlack"
-                android:textSize="24dp" />
-
-            <TextView
-                android:id="@+id/weather_position_textView"
-                style="@style/textView"
-                android:text="cloud" />
-
-            <TextView
-                android:id="@+id/humidity_textView"
-                style="@style/textView"
-                android:text="Humidity :" />
-
-            <TextView
-                android:id="@+id/windSpeed_textView"
-                style="@style/textView"
-                android:text="Wind Speed :" />
-
-            <TextView
-                android:id="@+id/maxTemp_textView"
-                style="@style/textView"
-                android:text="Max.Temp :"
-
-                />
-
-            <TextView
-                android:id="@+id/minTemp_textView"
-                style="@style/textView"
-                android:text="Min.Temp :" />
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            >
+            android:layout_margin="5dp">
 
-            <TextView
-                android:id="@+id/temperature_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_above="@+id/temperatureIcon_textView"
-                android:fontFamily="@font/roboto_regular"
-                android:text="24"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/colorBlack"
-                android:textSize="32sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/temperatureIcon_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:textColor="@color/colorPrimary"
-                />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:background="@color/colorPrimary" />
 
-        </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:id="@+id/info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        tools:ignore="NestedWeights">
+
+                        <TextView
+                            android:id="@+id/cityName_textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Dhaka"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/weather_position_textView"
+                            style="@style/textView"
+                            android:text="cloud" />
+
+                        <TextView
+                            android:id="@+id/humidity_textView"
+                            style="@style/textView"
+                            android:text="Humidity :" />
+
+                        <TextView
+                            android:id="@+id/windSpeed_textView"
+                            style="@style/textView"
+                            android:text="Wind Speed :" />
+
+                        <TextView
+                            android:id="@+id/maxTemp_textView"
+                            style="@style/textView"
+                            android:text="Max.Temp :"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/minTemp_textView"
+                            style="@style/textView"
+                            android:text="Min.Temp :" />
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/temperature_textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="24"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="32sp" />
+
+                        <ImageView
+                            android:id="@+id/temperatureIcon_textView"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_below="@+id/temperature_textView"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center"
+                            android:scaleType="center"
+                            android:src="@color/colorPrimary" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
-
 
 </LinearLayout>
