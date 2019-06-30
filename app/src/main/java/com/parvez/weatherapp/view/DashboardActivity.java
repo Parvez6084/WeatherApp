@@ -1,5 +1,9 @@
 package com.parvez.weatherapp.view;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
@@ -13,9 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.parvez.weatherapp.R;
 import com.parvez.weatherapp.adepter.CityInfoListAdepter;
 import com.parvez.weatherapp.model.CityInfoListClass;
+import com.parvez.weatherapp.service.NotificationService;
 import com.parvez.weatherapp.viewModel.DashBoardViewModel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,7 +43,16 @@ public class DashboardActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.text_layout_actionbar);
 
+        AlarmManager manager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        Intent intent = new Intent(DashboardActivity.this, NotificationService.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
+                intent, PendingIntent.FLAG_ONE_SHOT);
 
+        if (manager != null) {
+            manager.setExact(AlarmManager.RTC, calendar.getTimeInMillis() + 2000, pendingIntent);
+        }
 
         dashBoardViewModel = ViewModelProviders.of(this).get(DashBoardViewModel.class);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
