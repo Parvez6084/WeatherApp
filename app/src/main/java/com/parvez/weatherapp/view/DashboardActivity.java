@@ -43,16 +43,6 @@ public class DashboardActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.text_layout_actionbar);
 
-        AlarmManager manager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        Intent intent = new Intent(DashboardActivity.this, NotificationService.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
-                intent, PendingIntent.FLAG_ONE_SHOT);
-
-        if (manager != null) {
-            manager.setExact(AlarmManager.RTC, calendar.getTimeInMillis() + 2000, pendingIntent);
-        }
 
         dashBoardViewModel = ViewModelProviders.of(this).get(DashBoardViewModel.class);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);

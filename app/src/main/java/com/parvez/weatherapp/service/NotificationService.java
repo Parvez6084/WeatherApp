@@ -7,6 +7,8 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.util.Log;
 
@@ -27,7 +29,7 @@ public class NotificationService extends BroadcastReceiver {
 
     private String title;
     private String body;
-    private double temp;
+    private double temp =0;
 
     private String smallIcon,w_icon;
     private String largeIcon;
@@ -37,23 +39,18 @@ public class NotificationService extends BroadcastReceiver {
     private static final String TAG = "NotificationService";
 
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onReceive(Context context, Intent intent) {
 
-       // networkCall();
-        showNotification(context,title,body,intent);
+        if (intent.hasExtra("latitude")) {
+
+          //  networkCall();
+            showNotification(context, title, body, intent);
+
+        }
     }
 
-   /* private void networkCall() {
-
-
-   *//*     LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        double longitude = location.getLongitude();
-        double latitude = location.getLatitude();*//*
-
-        //lat lng
+    private void networkCall(double latitude, double longitude) {
 
         lat =35;
         lon=139;
@@ -66,7 +63,7 @@ public class NotificationService extends BroadcastReceiver {
             public void onResponse(Call<CurrentDataClass> call, Response<CurrentDataClass> response) {
                 CurrentDataClass currentDataClass = response.body();
                 //w_icon = currentDataClass.getWeather().get(0).getIcon();
-                temp = HelperClass.celsiusFormet(currentDataClass.getMain().getTemp());
+            //    temp = String.format("%.0f",HelperClass.celsiusFormet(currentDataClass.getMain().getTemp()));
 
             }
 
@@ -81,7 +78,7 @@ public class NotificationService extends BroadcastReceiver {
         body = "Current Temperature "+temp+"°c";
         largeIcon = "https://openweathermap.org/img/wn/"+w_icon+".png";
 
-    }*/
+    }
 
     public void showNotification(Context context, String title, String body, Intent intent) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
