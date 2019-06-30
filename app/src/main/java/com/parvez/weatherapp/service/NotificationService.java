@@ -186,7 +186,8 @@ class SendNotification extends AsyncTask<String, Void, Bitmap> {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, channelId)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
-                .setContentText(body);
+                .setContentText(body)
+                .setLargeIcon(result);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addNextIntent(intent);
