@@ -1,7 +1,6 @@
 package com.parvez.weatherapp.service;
 
 import android.Manifest;
-import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,30 +11,22 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.parvez.weatherapp.R;
 import com.parvez.weatherapp.model.CurrentDataClass;
 import com.parvez.weatherapp.network.ApiClient;
 import com.parvez.weatherapp.network.ApiInterface;
-import com.parvez.weatherapp.utility.HelperClass;
-import com.parvez.weatherapp.view.DashboardActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Calendar;
-import java.util.List;
 
 import im.delight.android.location.SimpleLocation;
 import retrofit2.Call;
@@ -46,9 +37,9 @@ public class NotificationService extends BroadcastReceiver {
 
     private String title;
     private String body;
-    private double temp =0;
+    private double temp = 0;
 
-    private String smallIcon,w_icon;
+    private String smallIcon, w_icon;
     private String largeIcon;
 
     String appid = "c11ce0d04f6389be490cd6acd4631dd0";
@@ -57,10 +48,7 @@ public class NotificationService extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
-
         networkCall(context, intent);
-//            showNotification(context, title, body, intent);
     }
 
     private void networkCall(Context context, Intent intent) {
@@ -89,9 +77,6 @@ public class NotificationService extends BroadcastReceiver {
                             showNotification(context, "WeatherApp", content,
                                     currentDataClass.getWeather().get(0).getIcon(), intent);
                         }
-                        //w_icon = currentDataClass.getWeather().get(0).getIcon();
-                        //    temp = String.format("%.0f",HelperClass.celsiusFormet(currentDataClass.getMain().getTemp()));
-
                     }
 
                     @Override
@@ -102,7 +87,6 @@ public class NotificationService extends BroadcastReceiver {
                 });
             }
         }
-
 
         title = "WeatherApp";
     }
